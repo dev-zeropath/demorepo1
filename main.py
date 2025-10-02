@@ -79,10 +79,12 @@ def get_notes():
 @app.route('/user', methods=['GET'])
 def get_user():
 
-    data = request.json
-    username = data.get('username')
+    user_id = validate_user()
+    if user_id is None:
+        return jsonify({"error": "Please log in"}), 401
 
-    return username, 200
+    username = users.get(user_id)['username']
+    return jsonify({"username": username}), 200
 
 @app.route('/note/<int:note_id>', methods=['GET'])
 def get_note(note_id):
