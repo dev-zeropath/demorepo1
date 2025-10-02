@@ -31,6 +31,7 @@ function login($username, $password) {
         echo "$query Invalid username or password.";
     }
 
+    $stmt->close();
     // Close connection
     $conn->close();
 }<?php
